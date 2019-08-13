@@ -1,4 +1,4 @@
-package edu.jhuapl.sbmt.spectrum.controllers;
+package edu.jhuapl.sbmt.spectrum.controllers.standard;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,11 +13,11 @@ import vtk.vtkFunctionParser;
 
 import edu.jhuapl.sbmt.spectrum.model.core.color.SpectrumColoringChangedListener;
 import edu.jhuapl.sbmt.spectrum.model.core.search.BaseSpectrumSearchModel;
-import edu.jhuapl.sbmt.spectrum.model.rendering.SpectraCollection;
 import edu.jhuapl.sbmt.spectrum.model.sbmtCore.spectra.ISpectralInstrument;
 import edu.jhuapl.sbmt.spectrum.model.sbmtCore.spectra.SpectrumColoringStyle;
-import edu.jhuapl.sbmt.spectrum.ui.SpectrumColoringPanel;
-import edu.jhuapl.sbmt.spectrum.ui.SpectrumMathPanel;
+import edu.jhuapl.sbmt.spectrum.rendering.SpectraCollection;
+import edu.jhuapl.sbmt.spectrum.ui.color.SpectrumColoringPanel;
+import edu.jhuapl.sbmt.spectrum.ui.math.SpectrumMathPanel;
 
 public class SpectrumColoringController
 {

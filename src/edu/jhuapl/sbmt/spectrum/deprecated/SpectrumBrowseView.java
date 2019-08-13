@@ -1,4 +1,4 @@
-package edu.jhuapl.sbmt.spectrum.ui.deprecated;
+package edu.jhuapl.sbmt.spectrum.deprecated;
 //package edu.jhuapl.sbmt.spectrum.ui;
 //
 //import java.awt.Component;

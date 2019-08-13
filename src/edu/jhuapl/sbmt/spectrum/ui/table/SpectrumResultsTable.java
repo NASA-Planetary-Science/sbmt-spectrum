@@ -1,4 +1,4 @@
-package edu.jhuapl.sbmt.spectrum.ui;
+package edu.jhuapl.sbmt.spectrum.ui.table;
 
 import javax.swing.JTable;
 

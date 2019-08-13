@@ -1,4 +1,4 @@
-package edu.jhuapl.sbmt.spectrum.ui;
+package edu.jhuapl.sbmt.spectrum.ui.color;
 
 import java.awt.Component;
 import java.text.DecimalFormat;

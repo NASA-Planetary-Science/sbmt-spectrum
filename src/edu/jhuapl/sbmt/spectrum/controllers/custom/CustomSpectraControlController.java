@@ -1,4 +1,4 @@
-package edu.jhuapl.sbmt.spectrum.controllers;
+package edu.jhuapl.sbmt.spectrum.controllers.custom;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

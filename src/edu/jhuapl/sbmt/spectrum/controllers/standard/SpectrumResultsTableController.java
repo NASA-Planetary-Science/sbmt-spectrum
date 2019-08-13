@@ -1,11 +1,10 @@
-package edu.jhuapl.sbmt.spectrum.controllers;
+package edu.jhuapl.sbmt.spectrum.controllers.standard;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
@@ -29,26 +28,26 @@ import edu.jhuapl.saavtk.gui.dialog.CustomFileChooser;
 import edu.jhuapl.saavtk.gui.render.Renderer;
 import edu.jhuapl.saavtk.model.ModelManager;
 import edu.jhuapl.saavtk.util.IdPair;
-import edu.jhuapl.saavtk.util.Properties;
 import edu.jhuapl.sbmt.client.SbmtInfoWindowManager;
 import edu.jhuapl.sbmt.spectrum.model.core.BasicSpectrum;
+import edu.jhuapl.sbmt.spectrum.model.core.BasicSpectrumInstrument;
 import edu.jhuapl.sbmt.spectrum.model.core.interfaces.SpectrumSearchResultsListener;
 import edu.jhuapl.sbmt.spectrum.model.core.search.BaseSpectrumSearchModel;
-import edu.jhuapl.sbmt.spectrum.model.rendering.IBasicSpectrumRenderer;
-import edu.jhuapl.sbmt.spectrum.model.rendering.SpectraCollection;
-import edu.jhuapl.sbmt.spectrum.model.rendering.SpectrumBoundaryCollection;
-import edu.jhuapl.sbmt.spectrum.model.sbmtCore.spectra.ISpectralInstrument;
 import edu.jhuapl.sbmt.spectrum.model.sbmtCore.spectra.SpectrumColoringStyle;
 import edu.jhuapl.sbmt.spectrum.model.sbmtCore.spectra.SpectrumKeyInterface;
+import edu.jhuapl.sbmt.spectrum.rendering.IBasicSpectrumRenderer;
+import edu.jhuapl.sbmt.spectrum.rendering.SpectraCollection;
+import edu.jhuapl.sbmt.spectrum.rendering.SpectrumBoundaryCollection;
+import edu.jhuapl.sbmt.spectrum.rendering.SpectrumStringRenderer;
 import edu.jhuapl.sbmt.spectrum.ui.SpectrumPopupMenu;
-import edu.jhuapl.sbmt.spectrum.ui.SpectrumResultsTableView;
+import edu.jhuapl.sbmt.spectrum.ui.table.SpectrumResultsTableView;
 
 public class SpectrumResultsTableController
 {
     protected SpectrumResultsTableView panel;
     protected BaseSpectrumSearchModel model;
     protected List<BasicSpectrum> spectrumRawResults;
-    protected ISpectralInstrument instrument;
+    protected BasicSpectrumInstrument instrument;
     protected Renderer renderer;
     protected SpectrumStringRenderer stringRenderer;
     protected PropertyChangeListener propertyChangeListener;
@@ -69,13 +68,13 @@ public class SpectrumResultsTableController
     };
     int modifiedTableRow = -1;
 
-    public SpectrumResultsTableController(ISpectralInstrument instrument, SpectraCollection spectrumCollection, ModelManager modelManager, SpectrumBoundaryCollection boundaries, BaseSpectrumSearchModel model, Renderer renderer, SbmtInfoWindowManager infoPanelManager)
+    public SpectrumResultsTableController(BasicSpectrumInstrument instrument, SpectraCollection spectrumCollection, ModelManager modelManager, SpectrumBoundaryCollection boundaries, BaseSpectrumSearchModel model, Renderer renderer, SbmtInfoWindowManager infoPanelManager)
     {
         spectrumPopupMenu = new SpectrumPopupMenu(spectrumCollection, modelManager,infoPanelManager, renderer);
         spectrumPopupMenu.setInstrument(instrument);
         panel = new SpectrumResultsTableView(spectrumCollection, spectrumPopupMenu);
         panel.setup();
-        this.boundaries = boundaries; //(SpectrumBoundaryCollection)model.getModelManager().getModel(model.getSpectrumBoundaryCollectionModelName());
+        this.boundaries = boundaries;
         spectrumRawResults = model.getSpectrumRawResults();
         this.spectrumCollection = spectrumCollection;
         this.model = model;
@@ -106,7 +105,7 @@ public class SpectrumResultsTableController
 			}
         };
 
-        propertyChangeListener = new SpectrumResultsPropertyChangeListener();
+        propertyChangeListener = new SpectrumResultsPropertyChangeListener(this);
         tableModelListener = new SpectrumResultsTableModeListener();
 
         this.spectrumCollection.addPropertyChangeListener(propertyChangeListener);
@@ -324,7 +323,6 @@ public class SpectrumResultsTableController
     private void prevButtonActionPerformed(ActionEvent evt)
     {
         IdPair resultIntervalCurrentlyShown = model.getResultIntervalCurrentlyShown();
-//        SpectraCollection collection = (SpectraCollection)model.getModelManager().getModel(ModelNames.SPECTRA);
         spectrumCollection.deselectAll();
         if (resultIntervalCurrentlyShown != null)
         {
@@ -355,7 +353,6 @@ public class SpectrumResultsTableController
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt)
     {
         IdPair resultIntervalCurrentlyShown = model.getResultIntervalCurrentlyShown();
-//        SpectraCollection collection = (SpectraCollection)model.getModelManager().getModel(ModelNames.SPECTRA);
         spectrumCollection.deselectAll();
         if (resultIntervalCurrentlyShown != null)
         {
@@ -386,14 +383,12 @@ public class SpectrumResultsTableController
 
     private void removeAllFootprintsButtonActionPerformed(ActionEvent evt)
     {
-//        SpectraCollection collection = (SpectraCollection)model.getModelManager().getModel(ModelNames.SPECTRA);
         spectrumCollection.removeAllSpectraForInstrument(instrument);
         model.setResultIntervalCurrentlyShown(null);
     }
 
     protected void removeAllFootprintsForAllInstrumentsButtonActionPerformed(ActionEvent evt)
     {
-//        SpectraCollection collection = (SpectraCollection)model.getModelManager().getModel(ModelNames.SPECTRA);
         spectrumCollection.removeAllSpectra();
         model.setResultIntervalCurrentlyShown(null);
     }
@@ -562,80 +557,12 @@ public class SpectrumResultsTableController
         showImageBoundaries(model.getResultIntervalCurrentlyShown());
     }
 
-    class SpectrumResultsPropertyChangeListener implements PropertyChangeListener
-    {
-        @Override
-        public void propertyChange(PropertyChangeEvent evt)
-        {
-            if (Properties.MODEL_CHANGED.equals(evt.getPropertyName()))
-            {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM-dd HH:mm:ss.SSS");
-                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                JTable resultsTable = panel.getResultList();
-                panel.getResultList().getModel().removeTableModelListener(tableModelListener);
-                int size = model.getSpectrumRawResults().size();
-
-                int startIndex = 0;
-                int endIndex = Math.min(10, size);
-
-                if (model.getResultIntervalCurrentlyShown() != null)
-                {
-                	startIndex = model.getResultIntervalCurrentlyShown().id1;
-                	endIndex = Math.min(size, model.getResultIntervalCurrentlyShown().id2);
-                }
-
-                if (modifiedTableRow > size) modifiedTableRow = -1;
-                if (modifiedTableRow != -1)
-                {
-                	startIndex = modifiedTableRow;
-                	endIndex = startIndex + 1;
-                }
-
-                if ((resultsTable.getModel().getRowCount() == 0) || (size != panel.getResultList().getRowCount()))  return;
-                if (size > 0)
-                {
-	                for (int i=startIndex; i<endIndex; ++i)
-	                {
-	                    int j = (Integer)panel.getResultList().getValueAt(i, panel.getIdColumnIndex())-1;
-	                    String name = model.getSpectrumRawResults().get(j).getDataName();
-	                    SpectrumKeyInterface key = model.createSpectrumKey(name, model.getInstrument());
-	                    IBasicSpectrumRenderer spectrum = spectrumCollection.getSpectrumFromKey(key);
-	                    if (spectrumCollection.containsKey(key))
-	                    {
-	                        resultsTable.setValueAt(true, i, panel.getMapColumnIndex());
-	                        resultsTable.setValueAt(spectrum.isVisible(), i, panel.getShowFootprintColumnIndex());
-	                        resultsTable.setValueAt(spectrum.isFrustumShowing(), i, panel.getFrusColumnIndex());
-	                        resultsTable.setValueAt(sdf.format(spectrum.getSpectrum().getDateTime().toDate().getTime()), i, panel.getDateColumnIndex());
-	                    }
-	                    else
-	                    {
-	                        resultsTable.setValueAt(false, i, panel.getMapColumnIndex());
-	                        resultsTable.setValueAt(false, i, panel.getShowFootprintColumnIndex());
-	                        resultsTable.setValueAt(false, i, panel.getFrusColumnIndex());
-	                    }
-
-	                    if (boundaries.containsBoundary(key))
-	                        resultsTable.setValueAt(true, i, panel.getBndrColumnIndex());
-	                    else
-	                        resultsTable.setValueAt(false, i, panel.getBndrColumnIndex());
-
-	                }
-                }
-                panel.getResultList().getModel().addTableModelListener(tableModelListener);
-                // Repaint the list in case the boundary colors has changed
-                resultsTable.repaint();
-            }
-        }
-    }
-
     class SpectrumResultsTableModeListener implements TableModelListener
     {
         public void tableChanged(TableModelEvent e)
         {
         	modifiedTableRow = e.getFirstRow();
             List<BasicSpectrum> spectrumRawResults = model.getSpectrumRawResults();
-//            ModelManager modelManager = model.getModelManager();
-//            SpectraCollection spectra = (SpectraCollection)modelManager.getModel(model.getSpectrumCollectionModelName());
             if (panel.getResultList().getModel().getRowCount() == 0) return;
             int actualRow = panel.getResultList().getRowSorter().convertRowIndexToView(e.getFirstRow());
             int row = (Integer)panel.getResultList().getValueAt(actualRow, panel.getIdColumnIndex())-1;
@@ -726,7 +653,6 @@ public class SpectrumResultsTableController
         public boolean isCellEditable(int row, int column)
         {
             // Only allow editing the hide column if the image is mapped
-//            int sortedRow = panel.getResultList().getRowSorter().convertRowIndexToModel(row);
             int actualRow = panel.getResultList().getRowSorter().convertRowIndexToView(row);
 
             int sortedRow = (Integer)panel.getResultList().getValueAt(actualRow, panel.getIdColumnIndex())-1;

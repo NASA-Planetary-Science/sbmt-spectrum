@@ -1,4 +1,4 @@
-package edu.jhuapl.sbmt.spectrum.controllers;
+package edu.jhuapl.sbmt.spectrum.controllers.custom;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,14 +15,16 @@ import edu.jhuapl.saavtk.gui.render.Renderer.LightingType;
 import edu.jhuapl.saavtk.model.ModelManager;
 import edu.jhuapl.saavtk.util.SafeURLPaths;
 import edu.jhuapl.sbmt.client.SbmtInfoWindowManager;
+import edu.jhuapl.sbmt.spectrum.controllers.standard.SpectrumResultsPropertyChangeListener;
+import edu.jhuapl.sbmt.spectrum.controllers.standard.SpectrumResultsTableController;
 import edu.jhuapl.sbmt.spectrum.model.core.BasicSpectrum;
+import edu.jhuapl.sbmt.spectrum.model.core.BasicSpectrumInstrument;
 import edu.jhuapl.sbmt.spectrum.model.core.search.CustomSpectraSearchModel;
 import edu.jhuapl.sbmt.spectrum.model.key.CustomSpectrumKey;
-import edu.jhuapl.sbmt.spectrum.model.rendering.IBasicSpectrumRenderer;
-import edu.jhuapl.sbmt.spectrum.model.rendering.SpectraCollection;
-import edu.jhuapl.sbmt.spectrum.model.rendering.SpectrumBoundaryCollection;
 import edu.jhuapl.sbmt.spectrum.model.sbmtCore.spectra.CustomSpectrumKeyInterface;
-import edu.jhuapl.sbmt.spectrum.model.sbmtCore.spectra.ISpectralInstrument;
+import edu.jhuapl.sbmt.spectrum.rendering.IBasicSpectrumRenderer;
+import edu.jhuapl.sbmt.spectrum.rendering.SpectraCollection;
+import edu.jhuapl.sbmt.spectrum.rendering.SpectrumBoundaryCollection;
 
 public class CustomSpectrumResultsTableController
         extends SpectrumResultsTableController
@@ -31,7 +33,7 @@ public class CustomSpectrumResultsTableController
     private CustomSpectraSearchModel model;
     private String customDataFolder;
 
-    public CustomSpectrumResultsTableController(ISpectralInstrument instrument,
+    public CustomSpectrumResultsTableController(BasicSpectrumInstrument instrument,
             SpectraCollection spectrumCollection, ModelManager modelManager, SpectrumBoundaryCollection boundaries, CustomSpectraSearchModel model,
             Renderer renderer, SbmtInfoWindowManager infoPanelManager)
     {
@@ -54,7 +56,7 @@ public class CustomSpectrumResultsTableController
         panel.getResultList().getModel().addTableModelListener(tableModelListener);
 
         this.spectrumCollection.removePropertyChangeListener(propertyChangeListener);
-        propertyChangeListener = new SpectrumResultsPropertyChangeListener();
+        propertyChangeListener = new SpectrumResultsPropertyChangeListener(this);
         this.spectrumCollection.addPropertyChangeListener(propertyChangeListener);
 
         tableModel = new SpectrumTableModel(new Object[0][7], columnNames);
@@ -96,8 +98,6 @@ public class CustomSpectrumResultsTableController
         {
             List<BasicSpectrum> spectrumRawResults = model.getSpectrumRawResults();
             results = model.getCustomSpectra();
-//            ModelManager modelManager = model.getModelManager();
-//            SpectraCollection spectra = (SpectraCollection)modelManager.getModel(model.getSpectrumCollectionModelName());
             if (panel.getResultList().getModel().getRowCount() == 0) return;
             int actualRow = panel.getResultList().getRowSorter().convertRowIndexToView(e.getFirstRow());
             int row = (Integer)panel.getResultList().getValueAt(actualRow, panel.getIdColumnIndex())-1;
@@ -108,13 +108,11 @@ public class CustomSpectrumResultsTableController
             {
                 if ((Boolean)panel.getResultList().getValueAt(actualRow, panel.getMapColumnIndex()))
                 {
-//                	model.loadSpectra(name, key);
                 	try
                     {
                         if (!spectrumCollection.containsKey(key))
                         {
                         	spectrumCollection.addSpectrum(key, true);
-//                            loadSpectrum(key, spectrumCollection);
                         }
                     }
                     catch (Exception e1) {

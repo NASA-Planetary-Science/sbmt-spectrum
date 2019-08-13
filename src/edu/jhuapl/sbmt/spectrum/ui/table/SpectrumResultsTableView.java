@@ -1,4 +1,4 @@
-package edu.jhuapl.sbmt.spectrum.ui;
+package edu.jhuapl.sbmt.spectrum.ui.table;
 
 import java.awt.Component;
 
@@ -12,7 +12,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
 
-import edu.jhuapl.sbmt.spectrum.model.rendering.SpectraCollection;
+import edu.jhuapl.sbmt.spectrum.rendering.SpectraCollection;
+import edu.jhuapl.sbmt.spectrum.ui.SpectrumPopupMenu;
 
 public class SpectrumResultsTableView extends JPanel
 {

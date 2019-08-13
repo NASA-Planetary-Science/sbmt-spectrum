@@ -8,7 +8,7 @@
  *
  * Created on Jun 5, 2012, 3:56:56 PM
  */
-package edu.jhuapl.sbmt.spectrum.ui;
+package edu.jhuapl.sbmt.spectrum.ui.math;
 
 import java.awt.Dialog;
 import java.util.List;

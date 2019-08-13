@@ -8,7 +8,7 @@
  *
  * Created on Sep 12, 2012, 5:22:17 PM
  */
-package edu.jhuapl.sbmt.spectrum.ui;
+package edu.jhuapl.sbmt.spectrum.ui.math;
 
 import edu.jhuapl.sbmt.spectrum.model.sbmtCore.spectra.math.SpectrumMath;
 

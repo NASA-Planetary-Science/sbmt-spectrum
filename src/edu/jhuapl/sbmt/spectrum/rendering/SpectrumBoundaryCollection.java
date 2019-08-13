@@ -1,4 +1,4 @@
-package edu.jhuapl.sbmt.spectrum.model.rendering;
+package edu.jhuapl.sbmt.spectrum.rendering;
 
 import java.awt.Color;
 import java.beans.PropertyChangeEvent;

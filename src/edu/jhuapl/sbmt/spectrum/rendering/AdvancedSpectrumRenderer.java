@@ -1,4 +1,4 @@
-package edu.jhuapl.sbmt.spectrum.model.rendering;
+package edu.jhuapl.sbmt.spectrum.rendering;
 
 import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;

@@ -1,4 +1,4 @@
-package edu.jhuapl.sbmt.spectrum.controllers;
+package edu.jhuapl.sbmt.spectrum.controllers.standard;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +26,7 @@ import edu.jhuapl.sbmt.client.SmallBodyModel;
 import edu.jhuapl.sbmt.spectrum.model.core.search.BaseSpectrumSearchModel;
 import edu.jhuapl.sbmt.spectrum.model.core.search.SpectraHierarchicalSearchSpecification;
 import edu.jhuapl.sbmt.spectrum.model.core.search.SpectrumSearchParametersModel;
-import edu.jhuapl.sbmt.spectrum.ui.SpectrumSearchParametersPanel;
+import edu.jhuapl.sbmt.spectrum.ui.search.SpectrumSearchParametersPanel;
 
 public class SpectrumSearchParametersController
 {

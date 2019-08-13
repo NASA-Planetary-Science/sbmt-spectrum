@@ -1,4 +1,4 @@
-package edu.jhuapl.sbmt.spectrum.controllers;
+package edu.jhuapl.sbmt.spectrum.rendering;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -9,7 +9,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 import edu.jhuapl.sbmt.spectrum.model.core.BasicSpectrum;
 import edu.jhuapl.sbmt.spectrum.model.core.search.BaseSpectrumSearchModel;
-import edu.jhuapl.sbmt.spectrum.model.rendering.SpectrumBoundaryCollection;
 import edu.jhuapl.sbmt.spectrum.model.sbmtCore.spectra.SpectrumKeyInterface;
 
 public class SpectrumStringRenderer extends DefaultTableCellRenderer
@@ -23,7 +22,6 @@ public class SpectrumStringRenderer extends DefaultTableCellRenderer
         this.spectrumSearchModel = spectrumSearchModel;
         this.spectrumRawResults = spectrumRawResults;
         this.model = boundaries;
-//        model = (SpectrumBoundaryCollection)spectrumSearchModel.getModelManager().getModel(spectrumSearchModel.getSpectrumBoundaryCollectionModelName());
     }
 
     public Component getTableCellRendererComponent(

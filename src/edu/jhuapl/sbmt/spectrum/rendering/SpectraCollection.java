@@ -1,4 +1,4 @@
-package edu.jhuapl.sbmt.spectrum.model.rendering;
+package edu.jhuapl.sbmt.spectrum.rendering;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -20,6 +20,7 @@ import edu.jhuapl.saavtk.util.Properties;
 import edu.jhuapl.sbmt.client.ISmallBodyModel;
 import edu.jhuapl.sbmt.client.SbmtSpectrumModelFactory;
 import edu.jhuapl.sbmt.spectrum.model.core.BasicSpectrum;
+import edu.jhuapl.sbmt.spectrum.model.core.BasicSpectrumInstrument;
 import edu.jhuapl.sbmt.spectrum.model.core.interfaces.SearchSpec;
 import edu.jhuapl.sbmt.spectrum.model.sbmtCore.spectra.ISpectralInstrument;
 import edu.jhuapl.sbmt.spectrum.model.sbmtCore.spectra.Spectrum;
@@ -138,12 +139,12 @@ public class SpectraCollection extends AbstractModel implements PropertyChangeLi
         return addSpectrum(key.getName(), key.getInstrument(), isCustom);
     }
 
-    public IBasicSpectrumRenderer addSpectrum(String path, ISpectralInstrument instrument, SpectrumColoringStyle coloringStyle) throws IOException
+    public IBasicSpectrumRenderer addSpectrum(String path, BasicSpectrumInstrument instrument, SpectrumColoringStyle coloringStyle) throws IOException
     {
         return addSpectrum(path, instrument, coloringStyle, false);
     }
 
-    public IBasicSpectrumRenderer addSpectrum(String path, ISpectralInstrument instrument, SpectrumColoringStyle coloringStyle, boolean isCustom) throws IOException
+    public IBasicSpectrumRenderer addSpectrum(String path, BasicSpectrumInstrument instrument, SpectrumColoringStyle coloringStyle, boolean isCustom) throws IOException
     {
     	IBasicSpectrumRenderer spec = addSpectrum(path, instrument, isCustom);
         spec.getSpectrum().setColoringStyle(coloringStyle);
@@ -157,7 +158,7 @@ public class SpectraCollection extends AbstractModel implements PropertyChangeLi
     }
 
 
-    public IBasicSpectrumRenderer addSpectrum(String path, ISpectralInstrument instrument, boolean isCustom) throws IOException
+    public IBasicSpectrumRenderer addSpectrum(String path, BasicSpectrumInstrument instrument, boolean isCustom) throws IOException
     {
         if (fileToSpectrumMap.containsKey(path))
         {

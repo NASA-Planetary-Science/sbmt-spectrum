@@ -1,4 +1,4 @@
-package edu.jhuapl.sbmt.spectrum.ui;
+package edu.jhuapl.sbmt.spectrum.ui.info;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -34,7 +34,8 @@ import edu.jhuapl.saavtk.model.Model;
 import edu.jhuapl.saavtk.model.ModelManager;
 import edu.jhuapl.saavtk.model.ModelNames;
 import edu.jhuapl.sbmt.spectrum.model.core.BasicSpectrum;
-import edu.jhuapl.sbmt.spectrum.model.rendering.SpectraCollection;
+import edu.jhuapl.sbmt.spectrum.rendering.SpectraCollection;
+import edu.jhuapl.sbmt.spectrum.ui.SpectrumPopupMenu;
 
 public class SpectrumInfoPanel extends ModelInfoWindow implements PropertyChangeListener
 {

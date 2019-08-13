@@ -1,4 +1,4 @@
-package edu.jhuapl.sbmt.spectrum.ui;
+package edu.jhuapl.sbmt.spectrum.ui.search;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;

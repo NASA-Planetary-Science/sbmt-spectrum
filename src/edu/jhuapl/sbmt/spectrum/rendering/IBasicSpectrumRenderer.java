@@ -1,4 +1,4 @@
-package edu.jhuapl.sbmt.spectrum.model.rendering;
+package edu.jhuapl.sbmt.spectrum.rendering;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
