@@ -256,7 +256,6 @@ public class SpectrumSearchParametersController<S extends BasicSpectrum>
             panel.getFromPhaseTextField().addActionListener(evt -> searchParameters.setMinPhaseQuery(Integer.parseInt(panel.getFromPhaseTextField().getText())));
             panel.getToPhaseTextField().addActionListener(evt -> searchParameters.setMaxPhaseQuery(Integer.parseInt(panel.getToPhaseTextField().getText())));
 
-            System.out.println("SpectrumSearchParametersController: setupSearchParametersPanel: image max " + imageSearchDefaultMaxSpacecraftDistance);
             toDistanceTextField.setValue(imageSearchDefaultMaxSpacecraftDistance);
 
         	setSearchParameters();
