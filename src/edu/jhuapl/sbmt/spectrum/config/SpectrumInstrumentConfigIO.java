@@ -121,8 +121,6 @@ public class SpectrumInstrumentConfigIO extends BaseFeatureConfigIO
 	{
 //		featureConfig = new SpectrumInstrumentConfig((BodyViewConfig)viewConfig);
 //		SpectrumInstrumentConfig c = new SpectrumInstrumentConfig();
-		System.out.println("SpectrumInstrumentConfigIO: storeConfig: unique name " + viewConfig.getUniqueName());
-		System.out.println("SpectrumInstrumentConfigIO: storeConfig: feature " + ((SpectrumInstrumentConfig)featureConfig).spectralInstruments.size());
 		SpectrumInstrumentConfig c = (SpectrumInstrumentConfig)featureConfig;
 		if (c.spectralInstruments == null) return configMetadata;
 //		SettableMetadata configMetadata = SettableMetadata.of(Version.of(metadataVersion));
@@ -130,7 +128,7 @@ public class SpectrumInstrumentConfigIO extends BaseFeatureConfigIO
 		int i = 0;
 		for (BasicSpectrumInstrument inst : c.spectralInstruments)
 		{
-			System.out.println("SpectrumInstrumentConfigIO: storeConfig: name " + inst.getDisplayName());
+//			System.out.println("SpectrumInstrumentConfigIO: storeConfig: name " + inst.getDisplayName());
 			// spectrumInstrumentMetadata[i++] =
 			// InstanceGetter.defaultInstanceGetter().providesMetadataFromGenericObject(BasicSpectrumInstrument.class).provide(inst);
 			//spectrumInstrumentMetadata[i++] = inst.store();
