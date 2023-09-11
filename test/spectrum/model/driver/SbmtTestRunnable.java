@@ -46,7 +46,7 @@ package spectrum.model.driver;
 //
 //			configureMissionBodies(mission);
 //
-//			NativeLibraryLoader.loadAllVtkLibraries();
+//			NativeLibraryLoader.loadVtkLibraries();
 //
 //			vtkJavaGarbageCollector garbageCollector = new vtkJavaGarbageCollector();
 //			//garbageCollector.SetDebug(true);
