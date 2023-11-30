@@ -27,9 +27,7 @@ import vtk.vtkPolyData;
 
 import edu.jhuapl.saavtk.model.ModelManager;
 import edu.jhuapl.saavtk.model.ModelNames;
-import edu.jhuapl.saavtk.model.structure.AbstractEllipsePolygonModel;
 import edu.jhuapl.saavtk.pick.PickManager;
-import edu.jhuapl.saavtk.pick.PickManager.PickMode;
 import edu.jhuapl.saavtk.structure.Ellipse;
 import edu.jhuapl.sbmt.core.body.SmallBodyModel;
 import edu.jhuapl.sbmt.core.listeners.SearchProgressListener;
@@ -273,14 +271,14 @@ public class SpectrumSearchParametersController<S extends BasicSpectrum>
                     model.setSelectedPath(panel.getCheckBoxTree().getCheckBoxTreeSelectionModel().getSelectionPaths());
                 panel.getSelectRegionButton().setSelected(false);
                 model.clearSpectraFromDisplay();
-                pickManager.setActivePicker(pickManager.getPickerForPickMode(PickMode.DEFAULT));
+                pickManager.setActivePicker(null);
 
-                AbstractEllipsePolygonModel selectionModel = (AbstractEllipsePolygonModel)modelManager.getModel(ModelNames.CIRCLE_SELECTION);
+                var selectionModel = pickManager.getSelectionPicker().getSelectionManager();
                 SmallBodyModel bodyModel = (SmallBodyModel)modelManager.getModel(ModelNames.SMALL_BODY);
                 if (selectionModel.getAllItems().size() > 0)
                 {
-               	  int numberOfSides = selectionModel.getNumberOfSides();
-                    Ellipse region = selectionModel.getItem(0);
+               	    var numberOfSides = selectionModel.getRenderAttr().numRoundSides();
+                    var region = (Ellipse)selectionModel.getItem(0);
 
                     // Always use the lowest resolution model for getting the intersection cubes list.
                     // Therefore, if the selection region was created using a higher resolution model,
@@ -422,7 +420,7 @@ public class SpectrumSearchParametersController<S extends BasicSpectrum>
     private void formComponentHidden()
     {
         panel.getSelectRegionButton().setSelected(false);
-        pickManager.setActivePicker(pickManager.getPickerForPickMode(PickMode.DEFAULT));
+        pickManager.setActivePicker(null);
     }
 
     /**
@@ -450,9 +448,10 @@ public class SpectrumSearchParametersController<S extends BasicSpectrum>
      */
     private void selectRegionButtonActionPerformed()
     {
-    	//TODO Need to confirm if this new way of doing things is correct
-    	if (panel.getSelectRegionButton().isSelected()) pickManager.setActivePicker(pickManager.getPickerForPickMode(PickMode.CIRCLE_SELECTION));
-    	else pickManager.setActivePicker(pickManager.getPickerForPickMode(PickMode.DEFAULT));
+        if (panel.getSelectRegionButton().isSelected()) 
+            pickManager.setActivePicker(pickManager.getSelectionPicker());
+        else 
+            pickManager.setActivePicker(null);
     }
 
     /**
@@ -460,8 +459,8 @@ public class SpectrumSearchParametersController<S extends BasicSpectrum>
      */
     private void clearRegionButtonActionPerformed()
     {
-        AbstractEllipsePolygonModel selectionModel = (AbstractEllipsePolygonModel)modelManager.getModel(ModelNames.CIRCLE_SELECTION);
-        selectionModel.removeAllStructures();
+        var selectionPicker = pickManager.getSelectionPicker();
+        selectionPicker.clearSelection();
     }
 
     /**
