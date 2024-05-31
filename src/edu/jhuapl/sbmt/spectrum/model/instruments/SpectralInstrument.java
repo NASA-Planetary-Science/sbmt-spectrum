@@ -7,7 +7,7 @@ import edu.jhuapl.sbmt.query.QueryBase;
 import edu.jhuapl.sbmt.spectrum.model.sbmtCore.spectra.Spectrum;
 import edu.jhuapl.sbmt.spectrum.model.sbmtCore.spectra.math.SpectrumMath;
 
-import crucible.crust.metadata.api.MetadataManager;
+import edu.jhuapl.ses.jsqrl.api.MetadataManager;
 
 /**
  * Spectral Instrument interface
