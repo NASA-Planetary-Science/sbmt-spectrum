@@ -23,11 +23,11 @@ import edu.jhuapl.sbmt.spectrum.model.core.interfaces.ISpectrumSearchModel;
 import edu.jhuapl.sbmt.spectrum.model.core.interfaces.SpectrumSearchResultsListener;
 import edu.jhuapl.sbmt.spectrum.model.io.SpectrumListIO;
 
-import crucible.crust.metadata.api.Key;
-import crucible.crust.metadata.api.Metadata;
-import crucible.crust.metadata.api.MetadataManager;
-import crucible.crust.metadata.api.Version;
-import crucible.crust.metadata.impl.SettableMetadata;
+import edu.jhuapl.ses.jsqrl.api.Key;
+import edu.jhuapl.ses.jsqrl.api.Metadata;
+import edu.jhuapl.ses.jsqrl.api.MetadataManager;
+import edu.jhuapl.ses.jsqrl.api.Version;
+import edu.jhuapl.ses.jsqrl.impl.SettableMetadata;
 
 /**
  * Base model for dealing with spectrum searches.  Contains references to the coloring model, as well as listeners for results and appearance listeners.

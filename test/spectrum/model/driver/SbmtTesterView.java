@@ -68,14 +68,14 @@ package spectrum.model.driver;
 //import edu.jhuapl.sbmt.spectrum.rendering.SpectrumBoundaryCollection;
 //import edu.jhuapl.sbmt.spectrum.ui.SpectrumPopupMenu;
 //
-//import crucible.crust.metadata.api.Key;
-//import crucible.crust.metadata.api.Metadata;
-//import crucible.crust.metadata.api.MetadataManager;
-//import crucible.crust.metadata.api.Version;
-//import crucible.crust.metadata.impl.EmptyMetadata;
-//import crucible.crust.metadata.impl.SettableMetadata;
-//import crucible.crust.metadata.impl.TrackedMetadataManager;
-//import crucible.crust.metadata.impl.Utilities;
+//import edu.jhuapl.ses.jsqrl.api.Key;
+//import edu.jhuapl.ses.jsqrl.api.Metadata;
+//import edu.jhuapl.ses.jsqrl.api.MetadataManager;
+//import edu.jhuapl.ses.jsqrl.api.Version;
+//import edu.jhuapl.ses.jsqrl.impl.EmptyMetadata;
+//import edu.jhuapl.ses.jsqrl.impl.SettableMetadata;
+//import edu.jhuapl.ses.jsqrl.impl.TrackedMetadataManager;
+//import edu.jhuapl.ses.jsqrl.impl.Utilities;
 //
 ///**
 // * A view is a container which contains a control panel and renderer as well as
