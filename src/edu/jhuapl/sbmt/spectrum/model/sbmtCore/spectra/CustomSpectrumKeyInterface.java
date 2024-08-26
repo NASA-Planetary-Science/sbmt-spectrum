@@ -2,10 +2,10 @@ package edu.jhuapl.sbmt.spectrum.model.sbmtCore.spectra;
 
 import edu.jhuapl.sbmt.spectrum.model.core.search.SpectrumSearchSpec;
 
-import crucible.crust.metadata.api.Key;
-import crucible.crust.metadata.api.Metadata;
-import crucible.crust.metadata.api.ProvidesGenericObjectFromMetadata;
-import crucible.crust.metadata.impl.InstanceGetter;
+import edu.jhuapl.ses.jsqrl.api.Key;
+import edu.jhuapl.ses.jsqrl.api.Metadata;
+import edu.jhuapl.ses.jsqrl.api.ProvidesGenericObjectFromMetadata;
+import edu.jhuapl.ses.jsqrl.impl.InstanceGetter;
 
 /**
  * Interface for Custom Spectrum Keys

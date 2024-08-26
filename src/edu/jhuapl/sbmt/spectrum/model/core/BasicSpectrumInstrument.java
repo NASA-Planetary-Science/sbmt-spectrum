@@ -10,10 +10,10 @@ import edu.jhuapl.sbmt.spectrum.model.sbmtCore.spectra.ISpectralInstrument;
 import edu.jhuapl.sbmt.spectrum.model.sbmtCore.spectra.Spectrum;
 import edu.jhuapl.sbmt.spectrum.model.sbmtCore.spectra.math.SpectrumMath;
 
-import crucible.crust.metadata.api.Key;
-import crucible.crust.metadata.api.Metadata;
-import crucible.crust.metadata.api.Version;
-import crucible.crust.metadata.impl.SettableMetadata;
+import edu.jhuapl.ses.jsqrl.api.Key;
+import edu.jhuapl.ses.jsqrl.api.Metadata;
+import edu.jhuapl.ses.jsqrl.api.Version;
+import edu.jhuapl.ses.jsqrl.impl.SettableMetadata;
 
 /**
  * Basic Spectrum Instrument type.  Contains information about display name, units, query type, spectrum math
