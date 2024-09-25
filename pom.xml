@@ -5,7 +5,7 @@
   <version>1.0.0</version>
   <name>sbmt-spectrum</name>
   <description>SBMT Spectrum library for spectrometers</description>
-  <packaging>jar</packaging>
+  <packaging>jar</packaging> 
   <organization>
 	<name>Johns Hopkins University Applied Physics Lab</name>
 	<url>https://www.jhuapl.edu</url>
