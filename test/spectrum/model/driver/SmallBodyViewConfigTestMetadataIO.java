@@ -51,10 +51,10 @@ public class SmallBodyViewConfigTestMetadataIO implements MetadataManager
     {
         SmallBodyViewConfigTest c = (SmallBodyViewConfigTest)config;
         SettableMetadata configMetadata = SettableMetadata.of(Version.of(1, 0));
-        writeEnum(body, c.body, configMetadata);
+//        writeEnum(body, c.body, configMetadata);
         writeEnum(type, c.type, configMetadata);
         writeEnum(population, c.population, configMetadata);
-        writeEnum(system, c.system, configMetadata);
+//        writeEnum(system, c.system, configMetadata);
         writeEnum(dataUsed, c.dataUsed, configMetadata);
         write(author, c.author.name(), configMetadata);
         write(rootDirOnServer, c.rootDirOnServer, configMetadata);
