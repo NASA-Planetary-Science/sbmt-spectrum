@@ -11,7 +11,7 @@
     <parent>
         <groupId>edu.jhuapl.ses.sbmt</groupId>
         <artifactId>sbmt-overview</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
 
     <url>https://github.com/NASA-Planetary-Science/sbmt-spectrum</url>
@@ -114,6 +114,11 @@
     </profiles>
 
     <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>edu.jhuapl.ses.sbmt</groupId>
             <artifactId>sbmt-query</artifactId>
